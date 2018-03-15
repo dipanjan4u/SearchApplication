@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: search-application
+security:
+  basic:
+    enabled: false
+search-app:
+  root-dir: D://Testdata
+  recursive-dir-search: true
+  case-sensitive: true
+  file-ext-to-search: txt,pdf
+ 
