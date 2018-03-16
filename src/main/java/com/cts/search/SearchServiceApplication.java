@@ -33,7 +33,7 @@ public class SearchServiceApplication {
 	  @Bean
 	  public ApiInfo apiInfo() {
 	    final ApiInfoBuilder builder = new ApiInfoBuilder();
-	    builder.title("File Search API through Swagger UI").version("1.0").license("(C) Copyright Saibal Ghosh")
+	    builder.title("File Search API through Swagger UI").version("1.0").license("(C) Copyright Cognizant Worldwide Limited").licenseUrl("http://cognizant.com")
 	        .description("List of all the APIs of Search through Swagger UI");
 
 	    return builder.build();
