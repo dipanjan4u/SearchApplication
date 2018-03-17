@@ -14,13 +14,16 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.cts.bo.FileSearchResultBO;
 import com.cts.bo.SearchBO;
 
 @Service("springManagedSearchBL")
+@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @PropertySource("classpath:application.yml")
 public class SearchBL {
 	private static Logger log = Logger.getLogger(SearchBL.class);
@@ -53,6 +56,12 @@ public class SearchBL {
 	 */
 	public void setCaseSensitiveSearch(boolean caseSensitiveSearch) {
 		this.caseSensitiveSearch = caseSensitiveSearch;
+	}
+	
+	
+
+	public void setRootDirectory(String rootDirectory) {
+		this.rootDirectory = rootDirectory;
 	}
 
 	/**
