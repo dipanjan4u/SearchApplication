@@ -31,4 +31,40 @@ public class SearchServiceApplicationTests {
 				.andExpect(status().isOk()).andExpect(jsonPath("$.TOTAL", is(3)));
 
 	}
+	
+	@Test
+	public void singleWordSearchCaseInSensitive() throws Exception {
+		searchTest.perform(get("/search/files").param("recursivesearch", "Y").param("casesensitive", "N")
+				.param("searchwords", "Rahul").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(jsonPath("$.TOTAL", is(3)));
+	}
+	
+	@Test
+	public void singleWordSearchNonRecursive() throws Exception {
+		searchTest.perform(get("/search/files").param("recursivesearch", "N").param("casesensitive", "Y")
+				.param("searchwords", "rahul").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(jsonPath("$.TOTAL", is(1)));
+	}	
+	
+	@Test
+	public void multiWordSearchCaseSensitive() throws Exception {
+		searchTest.perform(get("/search/files").param("recursivesearch", "Y").param("casesensitive", "Y")
+				.param("searchwords", "rahul good").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(jsonPath("$.TOTAL", is(1)));
+	}
+	
+	@Test
+	public void multiWordSearchCaseInSensitive() throws Exception {
+		searchTest.perform(get("/search/files").param("recursivesearch", "Y").param("casesensitive", "N")
+				.param("searchwords", "RAHUL GOOD").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(jsonPath("$.TOTAL", is(1)));
+	}
+	
+	@Test
+	public void multiWordSearchNonRecursive() throws Exception {
+		searchTest.perform(get("/search/files").param("recursivesearch", "N").param("casesensitive", "Y")
+				.param("searchwords", "rahul cognizant").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(jsonPath("$.TOTAL", is(1)));
+	}		
+
 }
